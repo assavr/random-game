@@ -86,6 +86,7 @@ button {
   border: none;
   background-color: transparent;
   padding: 0;
+  
 }
 
 h2 {
@@ -98,7 +99,7 @@ h3 {
 
 /* Header style start */
 .header {
-  width: 1440px;
+  width: 100%;
   height: 90px;
   margin: 0 auto;
   color: #FFF;
@@ -183,17 +184,20 @@ h3 {
 /* Main style start */
 
 .welcome {
+  width: 100%;
   position: relative;
   height: 600px;
   margin-top: -1px;
   background-color: #0C0C0E;
   margin-bottom: 20px;
+  background-image: url(../assets/img/welcome.png);
+  background-size: cover;
 }
 
-.welcome-img {
+/* .welcome-img {
   display: block;
   margin: 0 auto;
-}
+} */
 
 .welcome__title {
   position: absolute;
@@ -241,7 +245,7 @@ h3 {
 .about__title::before {
   content: '';
   position: absolute;
-  left: 670px;
+  left: 673px;
   top: 60px;
   width: 50px;
   height: 1px;
@@ -262,7 +266,7 @@ h3 {
 .about__images {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
 .carousel {
@@ -271,7 +275,15 @@ h3 {
 }
 
 .carousel__item {
-  padding: 5px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.carousel__item__circle {
   cursor: pointer;
 }
 
@@ -313,7 +325,7 @@ h3 {
 .favorites__title::before {
   content: '';
   position: absolute;
-  left: 670px;
+  left: 673px;
   top: 60px;
   width: 50px;
   height: 1px;
@@ -321,7 +333,7 @@ h3 {
 }
 
 .favorites__desc {
-  margin-bottom: 40px;
+  margin-bottom: 43px;
   color: #000;
   font-family: 'Inter';
   font-size: 20px;
@@ -354,19 +366,12 @@ h3 {
 
 
 .favorites__input {
-  margin-right: 20px;
-  padding: 5px;
+  margin-right: 16px;
   cursor: pointer;
 }
 
 
-/* .fav__winter {
-  font-family: 'Inter';
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
 
-} */
 
 
 .favorites__list {
@@ -384,7 +389,6 @@ h3 {
   font-style: normal;
   font-weight: 400;
   line-height: 40px;
-  /* 200% */
   letter-spacing: 2px;
 }
 
@@ -392,7 +396,7 @@ h3 {
   content: '';
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 3px;
   width: 60px;
   height: 1px;
   background-color: #BB945F;
@@ -463,6 +467,8 @@ h3 {
 
 .favorites__input {
   accent-color:black;
+  width: 17px;
+  height: 17px;
   }
     
   
@@ -612,13 +618,21 @@ h3 {
 }
 
 
-.coffee-shop__menu__right__list__item::before,
+
 .coffee-shop__menu__left__list__item::before {
   content: '';
   position: absolute;
   width: 100px;
   height: 1px;
   right: 81px;
+  background-color: #BB945F;
+}
+.coffee-shop__menu__right__list__item::before {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 1px;
+  right: 91px;
   background-color: #BB945F;
 }
 
@@ -666,8 +680,8 @@ h3 {
 .contacts__title::before {
   content: '';
   position: absolute;
-  top: 60px;
-  left: 673px;
+  top: 58px;
+  left: 675px;
   width: 50px;
   height: 1px;
   background-color: #0C0C0E;
@@ -790,7 +804,7 @@ h3 {
   width: 600px;
   height: 386px;
   border: 3px solid #BB945F;
-  padding: 20px 20px 30px 19px;
+  padding: 17px 20px 30px 19px;
 }
 
 .library-card__form__inside {
@@ -877,7 +891,7 @@ h3 {
 }
 
 .library-card__right__decs {
-  margin-bottom: 35px;
+  margin-bottom: 33px;
   font-family: 'Inter';
   font-size: 20px;
   font-style: normal;
@@ -891,7 +905,7 @@ h3 {
 .button-log {
   border-radius: 2px;
   border: 1px solid #0C0C0E;
-  padding: 9px 0;
+  padding: 8px 0;
   width: 75px;
   color: #0C0C0E;
   text-align: center;
@@ -951,6 +965,13 @@ h3 {
 
 .footer__top__left__list__icon {
   margin-right: 12px;
+  width: 24px;
+  height: 24px;
+}
+
+
+.social-img:hover {
+  filter: brightness(200%);
 }
 
 .footer__top__left__list__icon:last-child {
@@ -976,13 +997,13 @@ h3 {
   background: #FFF;
   width: 1400px;
   height: 0.5px;
-  margin-bottom: 44px;
+  margin-bottom: 42px;
 }
 
 .footer__down__list__item {
   color: #FFF;
   text-align: center;
-  font-family: Inter;
+  font-family: 'Inter';
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -1002,6 +1023,21 @@ h3 {
 .footer__down__list__item:nth-child(2) {
   margin-right: 306px;
 }
+
+.address-link,
+.rss-link,
+.github-name,
+.social-img {
+  transition: .3s;
+}
+.address-link:hover,
+.rss-link:hover,
+.github-name:hover,
+.social-img:hover {
+text-shadow: #ffa425 4px 2px 15px;
+filter: brightness(200%);
+
+}
 /* Footer style end */
 
 
@@ -1013,5 +1049,4 @@ h3 {
 .favorites__list_autumn {
   display: none;
 }
-
 

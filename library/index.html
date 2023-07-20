@@ -46,14 +46,16 @@
     </header>
     <!-- Main start -->
     <main class="main">
-        <div class="wallpaper-full">
+        
             <section class="welcome">
-                <img src="./assets/img/welcome.png" alt="library imagine" class="welcome-img">
+               <div class="wallpaper-full">
+                <!-- <img src="./assets/img/welcome.png" alt="library imagine" class="welcome-img"> -->
                 <h2 class="welcome__title">
                     <span class="span-welcome">Welcome</span><br> to the Brooklyn<br> Library
                 </h2>
+            </div>
             </section>
-        </div>
+        
 
         <section class="about" id="about">
             <div class="wallpaper">
@@ -99,7 +101,7 @@
                     Pick favorites of season
                 </p>
 
-                <form action="#" class="favorites__form">
+                <div class="favorites__form">
                     <input id="winter" type="radio" name="season" class="favorites__input" value="Winter" checked>
                     <label for="winter" class="favorites__label fav__winter">
                         Winter
@@ -109,16 +111,17 @@
                     <label for="spring" class="favorites__label fav__spring">
                         Spring
                     </label>
+
                     <input id="summer" type="radio" name="season" class="favorites__input" value="Summer">
                     <label for="summer" class="favorites__label fav__summer">
-                        Summer
+                         Summer
                     </label>
-
-                    <input id="autumn" type="radio" name="season" class="favorites__input" value="Autumn">
-                    <label for="autumn" class="favorites__label fav_autumn">
+<!-- ДОБАВИТЬ ОТСТУПЫ У РАДИО БАТОНОВ -->
+<input id="autumn" type="radio" name="season" class="favorites__input" value="Autumn">
+                    <label for="autumn" class="favorites__label fav_autumn">                        
                         Autumn
                     </label>
-                </form>
+                </div>
 
                 <ul class="favorites__list favorites__list_winter">
                     <li class="favorites__list__item">
@@ -261,7 +264,7 @@
 
                 </ul>
 
-                <!-- SPRING  SPRING   SPRING  SPRING   SPRING   SPRING  SPRING  SPRING  SPRING  SPRING  SPRING-->
+                
                 <!-- SUMMER     SUMMER  SUMMER   SUMMER  SUMMER  SUMMER     SUMMER  SUMMER      SUMMER-->
 
 
@@ -337,7 +340,7 @@
                     </li>
 
                 </ul>
-                <!-- SUMMER     SUMMER  SUMMER   SUMMER  SUMMER  SUMMER     SUMMER  SUMMER      SUMMER-->
+                
                 <!-- AUTUMN AUTUMN AUTUMN AUTUMN AUTUMN AUTUMN AUTUMN AUTUMN-->
 
 
@@ -407,7 +410,7 @@
                     </li>
 
                 </ul>
-                <!-- AUTUMN AUTUMN AUTUMN AUTUMN AUTUMN AUTUMN AUTUMN AUTUMN-->
+                
             </div>
         </section>
 
@@ -566,7 +569,9 @@
                     <li class="contacts__list-tel__item">
                         <span class="contacts__list-tel__item__tel-number">
                             <a href="tel:(617)-730-2385" class="contacts__list-tel__item__link"
-                                target="_blank">Putterham Library: (617) 730-2385</a>
+                                target="_blank">Putterham Library: (617) 730-2385
+                                
+                            </a>
                         </span>
                     </li>
 
@@ -584,11 +589,14 @@
                         </span>
                     </li>
                 </ul>
+
                 <a class="contacts__map"
-                    href="https://www.google.com/maps/dir//53.931521,27.646065/@53.9314507,27.5761168,12z?entry=ttu"
-                    target="_blank">
-                    <img src="./assets/img/map.png" alt="google map" class="contacts__map-img">
-                </a>
+                href="https://www.google.com/maps/dir//53.931521,27.646065/@53.9314507,27.5761168,12z?entry=ttu"
+                target="_blank">
+                <img src="./assets/img/map.png" alt="google map" class="contacts__map-img">
+                 </a>
+                
+                 
             </div>
         </section>
         <section class="library-card" id="library-card">
@@ -642,7 +650,7 @@
             <div class="footer__top">
                 <div class="footer__top__left">
                     <p class="footer__top__left__decs">
-                        <a href="https://www.google.com/maps/dir//53.931521,27.646065/@53.9314507,27.5761168,12z?entry=ttu"
+                        <a class="address-link" href="https://www.google.com/maps/dir//53.931521,27.646065/@53.9314507,27.5761168,12z?entry=ttu"
                             target="_blank">
                             286 Cadman Plaza, New York,<br>
                             NY 11238, United States
@@ -652,19 +660,19 @@
                     <ul class="footer__top__left__list">
                         <li class="footer__top__left__list__icon">
                             <a href="https://twitter.com/rollingscopes" target="_blank">
-                                <img src="./assets/svg/twitter.svg" alt="twitter pic">
+                                <img class="social-img" src="./assets/svg/twitter.svg" alt="twitter pic">
                             </a>
 
                         </li>
                         <li class="footer__top__left__list__icon">
                             <a href="https://rs.school/" target="_blank">
-                                <img src="./assets/svg/instagram.svg" alt="instagram">
+                                <img class="social-img" src="./assets/svg/instagram.svg" alt="instagram">
                             </a>
 
                         </li>
                         <li class="footer__top__left__list__icon">
                             <a href="https://www.facebook.com/rsschoolEN/?locale=ru_RU" target="_blank">
-                                <img src="./assets/svg/facebook.svg" alt="facebook">
+                                <img class="social-img" src="./assets/svg/facebook.svg" alt="facebook">
                             </a>
 
                         </li>
@@ -693,12 +701,12 @@
                     </li>
                     <li class="footer__down__list__item">
                         <span class="footer__down__rss">
-                            <a href="https://rs.school/js-stage0/" target="_blank">The Rolling Scopes School</a>
+                            <a class="rss-link" href="https://rs.school/js-stage0/" target="_blank">The Rolling Scopes School</a>
                         </span>
                     </li>
                     <li class="footer__down__list__item">
                         <span class="footer__down__github">
-                            <a href="https://github.com/assavr" class="footer__down__github__link">
+                            <a class="github-name" href="https://github.com/assavr" class="footer__down__github__link">
                                 Anastasia Savrukhina
                             </a>
                         </span>
