@@ -226,7 +226,7 @@ h3 {
 
 
 .about {
-  margin-bottom: 50px;
+  margin-bottom: 53px;
 }
 
 .about__title {
@@ -266,7 +266,7 @@ h3 {
 .about__images {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 37px;
 }
 
 .carousel {
@@ -276,7 +276,7 @@ h3 {
 
 .carousel__item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   width: 26px;
   height: 26px;
