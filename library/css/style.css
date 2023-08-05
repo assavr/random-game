@@ -244,7 +244,7 @@ input {
   margin-bottom: 61px;
 }
 
-.about__title::before {
+.title::before {
   content: '';
   position: absolute;
   left: 673px;
@@ -390,7 +390,6 @@ input {
 .favorites__list {
   display: flex;
   flex-wrap: wrap;
-  height: 1150px;
   align-content: space-between;
 }
 
@@ -1187,3 +1186,15 @@ input {
 }
 
 
+/* style for small */
+.button__img {
+  display: none;
+}
+
+.abbout__button__arrow {
+  display: none;
+}
+
+.carousel-off {
+  display: none;
+}
