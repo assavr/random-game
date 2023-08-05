@@ -8,10 +8,17 @@
 .wallpaper-full{
   max-width: 768px;
 }
+.body-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
 /* Header style start */
 .header {
   max-width: 100vw;
 }
+
+/* стили для бургер меню */
 .header__nav {
   visibility: hidden;
   position: absolute;
@@ -22,11 +29,13 @@
  width: 336px;
  height: 570px;
  background-color: #000;
+ transition: transform .5s, visibility .5s;
+ 
 }
 
 .header__list {
   display: block;
-  margin-top: 89px;
+  margin-top: 40px;
   text-align: center;
 }
 
@@ -41,26 +50,61 @@
 
 .button__img-2 {
   visibility: hidden;
-  position: absolute;
-  right: 31px;
+  position: relative;
+}
+
+.button__img-1,
+.button__img-2 {
+  display: block;
+}
+
+.header__nav__burger {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+  margin-top: 18px;
+  
 }
 
 .header.open .button__img-2 {
   visibility: visible;
+  z-index: 2;
+ 
 }
 
 .header.open .button__img-1 {
   visibility: hidden;
 }
- 
+
+.header.open .header__nav {
+  transform: translateX(-346px);
+  visibility: visible;
+}
+.header.open .header__user-profile {
+  display: none;
+}
+.button__user-profile-menu {
+  display: none;
+  margin-right: 20px;
+}
+
+
+.header.open .button__user-profile-menu {
+  display: block;
+  position: relative;
+  z-index: 2;
+}
 .header__title {
   margin-right: 321px;
+}
+.header__user-profile {
+  display: flex;
 }
 .button__user-profile {
   margin-right: 40px;
   position: relative;
-  z-index: 2;
 }
+
 
 .button__img{
   display: inline-block;
@@ -210,6 +254,10 @@
   }
   .contacts__map-img {
     width:600px;
+  }
+
+  .header__title {
+    margin-right: 230px;
   }
 
 }

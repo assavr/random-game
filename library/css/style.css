@@ -46,6 +46,7 @@ body {
   display: flex;
   flex-direction: column;
   color: #000;
+  align-items: center;
 
 }
 
@@ -58,6 +59,10 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   padding:
+}
+
+.body-wrapper {
+  width: 100%;
 }
 
 p {
@@ -169,6 +174,10 @@ input {
   line-height: 50px;
 }
 
+.header__user-profile {
+  display: flex;
+}
+
 
 .button__user-profile {
   cursor: pointer;
@@ -178,8 +187,6 @@ input {
 
 .button__user-profile:hover {
   filter: drop-shadow(0px 0px 10px #ee900c);
-  width: 30px;
-  height: 30px;
 }
 
 /* Header style end */
@@ -1200,6 +1207,15 @@ input {
 }
 
 .carousel-off {
+  display: none;
+}
+
+.button__img-1,
+.button__img-2 {
+  display: none;
+}
+
+.header__nav__burger {
   display: none;
 }
 
