@@ -37,10 +37,13 @@
   }
 
   /* TEST */
+  .favorites__list {
+    margin-right: 10px;
+  }
   .favorites__list__item {
     margin-left: 9%;
     margin-bottom: 40px;
-    margin-right: 10px;
+    
   }
 
   .favorites__list__item:last-child {
