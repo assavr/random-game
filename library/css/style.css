@@ -249,16 +249,7 @@ input {
   margin-bottom: 61px;
 }
 
-.title::before {
-  content: '';
-  position: absolute;
-  left: 673px;
-  top: 60px;
-  width: 50px;
-  height: 1px;
-  background-color: #0C0C0E;
 
-}
 
 .about__desc {
   text-align: center;
@@ -1222,5 +1213,15 @@ input {
   display: none;
 }
 
+.title::before {
+  content: '';
+  position: absolute;
+  left: 48%;
+  top: 60px;
+  width: 50px;
+  height: 1px;
+  background-color: #0C0C0E;
+
+}
 
 
