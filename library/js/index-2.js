@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("button__burger-open").addEventListener("click", function () {
-      document.querySelector(".header").classList.toggle("open")
+    document.querySelector(".header").classList.toggle("open")
   })
 });
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("button__burger-close").addEventListener("click", function () {
-      document.querySelector(".header").classList.toggle("open")
+    document.querySelector(".header").classList.toggle("open")
   })
 });
 
