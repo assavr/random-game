@@ -1,0 +1,57 @@
+*{
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(221, 199, 126, 0.63);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas {
+  width: 800px;
+  height: 800px;
+  border: 20px solid rgb(207, 112, 22);
+  border-radius: 20px;
+  background-color: rgba(216, 123, 86, 0.5);
+  position: relative;
+}
+
+.dead-line {
+  width: 100%;
+  height: 30px;
+  background-color: rgb(108, 168, 80);
+  position: absolute;
+  bottom: 0;
+}
+
+.catcher {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  bottom: 30px;
+  left: calc(50% - 40px);
+  z-index: 10;
+}
+
+.house {
+  width: 150px;
+  position: absolute;
+  bottom: 18px;
+  right: 30px;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.tree {
+  width: 150px;
+  position: absolute;
+  bottom: 10px;
+  left: 30px;
+  z-index: 1;
+  opacity: 0.7;
+}
+
