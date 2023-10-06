@@ -12,6 +12,7 @@ body {
 }
 
 .canvas {
+  overflow: hidden;
   width: 800px;
   height: 800px;
   border: 20px solid rgb(207, 112, 22);
@@ -55,3 +56,11 @@ body {
   opacity: 0.7;
 }
 
+.leaf {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: -60px;
+  z-index: 11;
+  background-image: url(../img/leaf.svg);
+}
