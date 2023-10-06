@@ -6,7 +6,10 @@ let catcherLeft = parseInt(
 const catcherBottom = parseInt(
   window.getComputedStyle(catcher).getPropertyValue('bottom'),
 );
+const scorePoint = document.querySelector('.score-points');
 let score = 0;
+let hp = 3;
+console.log(hp);
 
 function moveCatcherLeft() {
   if (catcherLeft > 0) {
@@ -24,7 +27,7 @@ function moveCatcherRight() {
 function control(e) {
   if (e.key == 'ArrowLeft') {
     moveCatcherLeft();
-    console.log(e.key)
+    console.log(e.key);
   }
   if (e.key == 'ArrowRight') {
     moveCatcherRight();
@@ -38,16 +41,22 @@ function generateLeaves() {
   leaf.setAttribute('class', 'leaf');
   leaves.appendChild(leaf);
   function fallDownLeaves() {
-    if (leafBottom < catcherBottom + 50 && leafBottom > catcherBottom && leafLeft > catcherLeft - 30 && leafLeft < catcherLeft + 80) {
+    if (
+      leafBottom < catcherBottom + 50 &&
+      leafBottom > catcherBottom &&
+      leafLeft > catcherLeft - 30 &&
+      leafLeft < catcherLeft + 80
+    ) {
       leaves.removeChild(leaf);
       clearInterval(fallInterval);
       score++;
+      scorePoint.innerText = `${score}`
     }
     if (leafBottom < catcherBottom) {
-      alert('Dead! Your score is:' + ` ${score}`);
-      clearInterval(fallInterval);
-      clearTimeout(leafTimeout);
-      location.reload();
+        alert('Dead! Your score is:' + ` ${score}`);
+        clearInterval(fallInterval);
+        clearTimeout(leafTimeout);
+        location.reload();
     }
     leafBottom -= 5;
     leaf.style.bottom = leafBottom + 'px';

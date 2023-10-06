@@ -1,14 +1,25 @@
-*{
+* {
   box-sizing: border-box;
 }
 
 body {
   background-color: rgba(221, 199, 126, 0.63);
+  color: #71270f;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.title {
+  font-size: 4em;
+  margin-top: 0;
+}
+
+.title-pumpkin {
+  width: 50px;
+  margin: 0 5px -10px;
 }
 
 .canvas {
@@ -19,6 +30,29 @@ body {
   border-radius: 20px;
   background-color: rgba(216, 123, 86, 0.5);
   position: relative;
+}
+
+.hp__block {
+  display: flex;
+  justify-content: right;
+  margin-right: 20px;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.hp {
+  width: 40px;
+}
+
+.div-score {
+  width: fit-content;
+  text-align: right;
+  margin-left: 580px;
+}
+
+.span-score {
+  font-size: 1.5em;
 }
 
 .dead-line {
