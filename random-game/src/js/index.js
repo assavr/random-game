@@ -7,6 +7,7 @@ const catcherBottom = parseInt(
   window.getComputedStyle(catcher).getPropertyValue('bottom'),
 );
 const scorePoint = document.querySelector('.score-points');
+const hpImage = document.querySelectorAll('.hp');
 let score = 0;
 let hp = 3;
 console.log(hp);
@@ -50,13 +51,20 @@ function generateLeaves() {
       leaves.removeChild(leaf);
       clearInterval(fallInterval);
       score++;
-      scorePoint.innerText = `${score}`
+      scorePoint.innerText = `${score}`;
     }
     if (leafBottom < catcherBottom) {
-        alert('Dead! Your score is:' + ` ${score}`);
-        clearInterval(fallInterval);
-        clearTimeout(leafTimeout);
+      hp--;
+      hpImage[hp].style.opacity = 0;
+      console.log(hp);
+      clearInterval(fallInterval);
+      clearTimeout(leafTimeout);
+      if (hp === 0) {
+        hpImage[hp].style.opacity = 0;
+        alert('Game over! Your score is:' + ` ${score}`);
         location.reload();
+      }
+
     }
     leafBottom -= 5;
     leaf.style.bottom = leafBottom + 'px';
