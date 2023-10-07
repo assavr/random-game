@@ -1,16 +1,11 @@
 const catcher = document.querySelector('.catcher');
-const leaves = document.querySelector('.leaves');
-let catcherLeft = parseInt(
-  window.getComputedStyle(catcher).getPropertyValue('left'),
-);
-const catcherBottom = parseInt(
-  window.getComputedStyle(catcher).getPropertyValue('bottom'),
-);
-const scorePoint = document.querySelector('.score-points');
+const catcherBottom = parseInt(window.getComputedStyle(catcher).getPropertyValue('bottom'));
 const hpImage = document.querySelectorAll('.hp');
-let score = 0;
+const leaves = document.querySelector('.leaves');
+const scorePoint = document.querySelector('.score-points');
+let catcherLeft = parseInt(window.getComputedStyle(catcher).getPropertyValue('left'));
 let hp = 3;
-console.log(hp);
+let score = 0;
 
 function moveCatcherLeft() {
   if (catcherLeft > 0) {
@@ -25,12 +20,11 @@ function moveCatcherRight() {
   }
 }
 
-function control(e) {
-  if (e.key == 'ArrowLeft') {
+function control(event) {
+  if (event.key === 'ArrowLeft' || event.code === 'KeyA') {
     moveCatcherLeft();
-    console.log(e.key);
   }
-  if (e.key == 'ArrowRight') {
+  if (event.key === 'ArrowRight' || event.code === 'KeyD') {
     moveCatcherRight();
   }
 }
@@ -56,7 +50,6 @@ function generateLeaves() {
     if (leafBottom < catcherBottom) {
       hp--;
       hpImage[hp].style.opacity = 0;
-      console.log(hp);
       clearInterval(fallInterval);
       clearTimeout(leafTimeout);
       if (hp === 0) {
@@ -73,5 +66,6 @@ function generateLeaves() {
   let fallInterval = setInterval(fallDownLeaves, 20);
   let leafTimeout = setTimeout(generateLeaves, 2000);
 }
+
 generateLeaves();
 document.addEventListener('keydown', control);
