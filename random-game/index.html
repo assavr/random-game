@@ -5,22 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/style/normalize.css" />
     <link rel="stylesheet" href="./src/style/style.css" />
-    <link
-      rel="icon"
-      href="./src/img/leaf.svg"
-      type="image/svg+xml"
-    />
+    <link rel="icon" href="./src/img/leaf.svg" type="image/svg+xml" />
     <title>Happy Fall</title>
   </head>
   <body>
-    <h1 class="title">H<span><img class="title-pumpkin" src="./src/img/pumpkin.svg" alt=""></span>ppy Fall!</h1>
+    <h1 class="title">
+      H<span
+        ><img class="title-pumpkin" src="./src/img/pumpkin.svg" alt="" /></span
+      >ppy Fall!
+    </h1>
     <div class="canvas">
       <div class="hp__block">
-        <img class="hp" src="./src/img/hp-transformed.png" alt="health points">
-        <img class="hp" src="./src/img/hp-transformed.png" alt="health points">
-        <img class="hp" src="./src/img/hp-transformed.png" alt="health points">
+        <img
+          class="hp"
+          src="./src/img/hp-transformed.png"
+          alt="health points"
+        />
+        <img
+          class="hp"
+          src="./src/img/hp-transformed.png"
+          alt="health points"
+        />
+        <img
+          class="hp"
+          src="./src/img/hp-transformed.png"
+          alt="health points"
+        />
       </div>
-      <div class="div-score"><span class="span-score">Score: <span class="score-points">0</span> </span></div>
+      <div class="div-score">
+        <span class="span-score"
+          >Score: <span class="score-points">0</span>
+        </span>
+      </div>
       <div class="leaves"></div>
       <div class="dead-line"></div>
       <div class="catcher">
@@ -30,10 +46,20 @@
         <img src="./src/img/house.svg" alt="" class="house__img" />
       </div>
       <div class="tree">
-        <img src="./src/img/firs.svg" alt="tree pic">
+        <img src="./src/img/firs.svg" alt="tree pic" />
       </div>
-    </div>
-
+      <div class="modal-hello">
+        <div class="modal-hello__content">
+            <h2>H<span
+              ><img class="title-pumpkin" src="./src/img/pumpkin.svg" alt="" /></span
+            >ppy Fall!</h2>
+            <p class="modal-hello__game-description">
+              Привет!<br> В этой игре тебе предстоит собрать осенний букет<span ><img class="span__img-leaf" src="./src/img/leaf.svg" alt="leaf" width="20px"></span> и не промокнуть<span ><img class="span__img-drop" src="./src/img/drop.svg" alt="drop" width="20px"></span>! Будь аккуратен, болеть не круто!
+            </p>
+            <button class="button__play-game"><img src="./src/img/play-game.svg" alt=""></button>
+        </div>
+        <!-- <button class="play"></button> -->
+      </div>
     </div>
     <script src="./src/js/index.js"></script>
   </body>

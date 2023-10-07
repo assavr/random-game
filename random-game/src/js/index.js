@@ -1,9 +1,13 @@
 const catcher = document.querySelector('.catcher');
-const catcherBottom = parseInt(window.getComputedStyle(catcher).getPropertyValue('bottom'));
+const catcherBottom = parseInt(
+  window.getComputedStyle(catcher).getPropertyValue('bottom'),
+);
 const hpImage = document.querySelectorAll('.hp');
 const leaves = document.querySelector('.leaves');
 const scorePoint = document.querySelector('.score-points');
-let catcherLeft = parseInt(window.getComputedStyle(catcher).getPropertyValue('left'));
+let catcherLeft = parseInt(
+  window.getComputedStyle(catcher).getPropertyValue('left'),
+);
 let hp = 3;
 let score = 0;
 
@@ -57,7 +61,6 @@ function generateLeaves() {
         alert('Game over! Your score is:' + ` ${score}`);
         location.reload();
       }
-
     }
     leafBottom -= 5;
     leaf.style.bottom = leafBottom + 'px';
@@ -67,5 +70,13 @@ function generateLeaves() {
   let leafTimeout = setTimeout(generateLeaves, 2000);
 }
 
-generateLeaves();
+const buttonPlay = document.querySelector('.button__play-game');
+const modalHello = document.querySelector('.modal-hello');
+buttonPlay.addEventListener('click', startGame);
+
+function startGame() {
+  modalHello.style.display = 'none';
+  generateLeaves();
+}
+// generateLeaves();
 document.addEventListener('keydown', control);
