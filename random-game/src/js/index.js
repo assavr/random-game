@@ -1,3 +1,6 @@
+import { controlAudio, playAudio} from './audio.js';
+
+
 const catcher = document.querySelector('.catcher');
 const catcherBottom = parseInt(
   window.getComputedStyle(catcher).getPropertyValue('bottom'),
@@ -8,16 +11,19 @@ const rain = document.querySelector('.rain')
 const scorePoint = document.querySelector('.score-points');
 const buttonPlay = document.querySelector('.button__play-game');
 const modalHello = document.querySelector('.modal-hello');
+const buttonVolume = document.querySelector('.btn-sound-volume');
 let catcherLeft = parseInt(
   window.getComputedStyle(catcher).getPropertyValue('left'),
 );
 let hp = 3;
 let score = 0;
 
+
 function startGame() {
   modalHello.style.display = 'none';
   generateLeaves();
   generateRain();
+  playAudio('background audio');
   document.addEventListener('keydown', control);
 }
 
@@ -57,6 +63,7 @@ function generateLeaves() {
       leafLeft > catcherLeft - 30 &&
       leafLeft < catcherLeft + 80
     ) {
+      controlAudio('catch leaf');
       leaves.removeChild(leaf);
       clearInterval(fallInterval);
       score++;
@@ -68,8 +75,10 @@ function generateLeaves() {
       clearInterval(fallInterval);
       clearTimeout(leafTimeout);
       if (hp === 0) {
+
         hpImage[hp].style.opacity = 0;
         alert('Game over! Your score is:' + ` ${score}`);
+        // playAudio('game over')
         location.reload();
       }
     }
@@ -94,13 +103,16 @@ function generateRain() {
       dropLeft > catcherLeft - 30 &&
       dropLeft < catcherLeft + 80
     ) {
+      controlAudio('catch drop');
       rain.removeChild(drop);
       clearInterval(fallInterval);
       clearTimeout(dropTimeout);
       hp--;
       hpImage[hp].style.opacity = 0;
       if( hp === 0) {
+
         alert('Game over! Your score is:' + ` ${score}`);
+        // playAudio('game over')
         location.reload();
       }
     }
@@ -115,3 +127,4 @@ function generateRain() {
 
 
 buttonPlay.addEventListener('click', startGame);
+buttonVolume.addEventListener('click', () => controlAudio('background audio'))
