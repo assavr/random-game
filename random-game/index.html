@@ -10,10 +10,13 @@
   </head>
   <body>
     <div class="header">
-      <button class="btn-sound-volume" ></button>
+      <button class="btn-sound-volume"></button>
       <h1 class="title">
         H<span
-          ><img class="title-pumpkin" src="./src/img/pumpkin.svg" alt="" /></span
+          ><img
+            class="title-pumpkin"
+            src="./src/img/pumpkin.svg"
+            alt="" /></span
         >ppy Fall!
       </h1>
     </div>
@@ -44,7 +47,7 @@
       <div class="rain"></div>
       <div class="dead-line"></div>
       <div class="catcher">
-        <img class="catcher__img" src="./src/img/fox.svg" alt=""/>
+        <img class="catcher__img" src="./src/img/fox.svg" alt="" />
       </div>
       <div class="house">
         <img src="./src/img/house.svg" alt="" class="house__img" />
@@ -54,18 +57,54 @@
       </div>
       <div class="modal-hello">
         <div class="modal-hello__content">
-            <h2>H<span
-              ><img class="title-pumpkin" src="./src/img/pumpkin.svg" alt="" /></span
-            >ppy Fall!</h2>
-            <p class="modal-hello__game-description">
-              Привет!<br> В этой игре тебе предстоит собрать осенний букет<span ><img class="span__img-leaf" src="./src/img/leaf.svg" alt="leaf" width="20px"></span> и не промокнуть<span ><img class="span__img-drop" src="./src/img/drop.svg" alt="drop" width="20px"></span>! Будь аккуратен, болеть не круто!
-            </p>
-            <button class="button__play-game"><img src="./src/img/play-game.svg" alt=""></button>
+          <h2>
+            H<span
+              ><img
+                class="title-pumpkin"
+                src="./src/img/pumpkin.svg"
+                alt="" /></span
+            >ppy Fall!
+          </h2>
+          <p class="modal-hello__game-description">
+            Привет!<br />
+            В этой игре тебе предстоит собрать осенний букет<span
+              ><img
+                class="span__img-leaf"
+                src="./src/img/leaf.svg"
+                alt="leaf"
+                width="20px"
+            /></span>
+            и не промокнуть<span
+              ><img
+                class="span__img-drop"
+                src="./src/img/drop.svg"
+                alt="drop"
+                width="20px" /></span
+            >! Будь аккуратен, болеть не круто!
+          </p>
+          <button class="button__play-game">
+            <img src="./src/img/play-game.svg" alt="" />
+          </button>
         </div>
-        <!-- <button class="play"></button> -->
+      </div>
+      <div class="modal-game-over none">
+        <div class="modal-game-over__content">
+          <h2>
+            G<span
+              ><img
+                class="title-pumpkin"
+                src="./src/img/game-over.png"
+                alt="" /></span
+            >me Over!
+          </h2>
+          <p class="game-over__score">Твой счёт: <span class="score-points-finally">0</span></p>
+          <p class="game-over__description">
+            На улице было слишком холодно и дождливо, ты заболел! Выздоравливай и возвращайся снова!
+          </p>
+          <button class="restart">Выздороветь</button>
+        </div>
       </div>
     </div>
     <script src="./src/js/index.js" type="module"></script>
-
   </body>
 </html>

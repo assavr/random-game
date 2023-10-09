@@ -9,15 +9,30 @@ const hpImage = document.querySelectorAll('.hp');
 const leaves = document.querySelector('.leaves');
 const rain = document.querySelector('.rain')
 const scorePoint = document.querySelector('.score-points');
+const scorePointFinally = document.querySelector('.score-points-finally');
 const buttonPlay = document.querySelector('.button__play-game');
 const modalHello = document.querySelector('.modal-hello');
+const modalGameOver = document.querySelector('.modal-game-over');
+const btnRestart = document.querySelector('.restart')
 const buttonVolume = document.querySelector('.btn-sound-volume');
 let catcherLeft = parseInt(
   window.getComputedStyle(catcher).getPropertyValue('left'),
 );
+
 let hp = 3;
 let score = 0;
 
+btnRestart.addEventListener('click', restartGame);
+
+function restartGame() {
+  hp = 3;
+  score = 0;
+    modalHello.style.display = 'none';
+    generateLeaves();
+    generateRain();
+    playAudio('background audio');
+    document.addEventListener('keydown', control);
+  }
 
 function startGame() {
   modalHello.style.display = 'none';
@@ -75,11 +90,11 @@ function generateLeaves() {
       clearInterval(fallInterval);
       clearTimeout(leafTimeout);
       if (hp === 0) {
-
-        hpImage[hp].style.opacity = 0;
-        alert('Game over! Your score is:' + ` ${score}`);
-        // playAudio('game over')
-        location.reload();
+        scorePointFinally.innerText = `${score}`;
+        modalGameOver.classList.remove('none');
+        modalHello.classList.add('none');
+        // hpImage[hp].style.opacity = 0;
+        playAudio('game over')
       }
     }
     leafBottom -= 5;
@@ -110,10 +125,14 @@ function generateRain() {
       hp--;
       hpImage[hp].style.opacity = 0;
       if( hp === 0) {
-
-        alert('Game over! Your score is:' + ` ${score}`);
-        // playAudio('game over')
-        location.reload();
+        scorePointFinally.innerText = `${score}`;
+        modalGameOver.classList.remove('none');
+        modalHello.classList.add('none');
+        // hpImage[hp].style.opacity = 0;
+        playAudio('game over')
+        // alert('Game over! Your score is:' + ` ${score}`);
+        // // playAudio('game over')
+        // location.reload();
       }
     }
     dropBottom -= 5;
