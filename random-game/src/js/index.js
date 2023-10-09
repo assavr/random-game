@@ -4,22 +4,33 @@ const catcherBottom = parseInt(
 );
 const hpImage = document.querySelectorAll('.hp');
 const leaves = document.querySelector('.leaves');
+const rain = document.querySelector('.rain')
 const scorePoint = document.querySelector('.score-points');
+const buttonPlay = document.querySelector('.button__play-game');
+const modalHello = document.querySelector('.modal-hello');
 let catcherLeft = parseInt(
   window.getComputedStyle(catcher).getPropertyValue('left'),
 );
 let hp = 3;
 let score = 0;
 
+function startGame() {
+  modalHello.style.display = 'none';
+  generateLeaves();
+  generateRain();
+  document.addEventListener('keydown', control);
+}
+
 function moveCatcherLeft() {
   if (catcherLeft > 0) {
-    catcherLeft -= 15;
+    catcherLeft -= 20;
     catcher.style.left = catcherLeft + 'px';
   }
 }
+
 function moveCatcherRight() {
   if (catcherLeft < 670) {
-    catcherLeft += 15;
+    catcherLeft += 20;
     catcher.style.left = catcherLeft + 'px';
   }
 }
@@ -70,13 +81,37 @@ function generateLeaves() {
   let leafTimeout = setTimeout(generateLeaves, 2000);
 }
 
-const buttonPlay = document.querySelector('.button__play-game');
-const modalHello = document.querySelector('.modal-hello');
-buttonPlay.addEventListener('click', startGame);
-
-function startGame() {
-  modalHello.style.display = 'none';
-  generateLeaves();
+function generateRain() {
+  let dropBottom = 750;
+  const dropLeft = Math.floor(Math.random() * 700);
+  const drop = document.createElement('div');
+  drop.setAttribute('class', 'drop');
+  rain.appendChild(drop);
+  function fallDownDrop() {
+    if (
+      dropBottom < catcherBottom + 50 &&
+      dropBottom > catcherBottom &&
+      dropLeft > catcherLeft - 30 &&
+      dropLeft < catcherLeft + 80
+    ) {
+      rain.removeChild(drop);
+      clearInterval(fallInterval);
+      clearTimeout(dropTimeout);
+      hp--;
+      hpImage[hp].style.opacity = 0;
+      if( hp === 0) {
+        alert('Game over! Your score is:' + ` ${score}`);
+        location.reload();
+      }
+    }
+    dropBottom -= 5;
+    drop.style.bottom = dropBottom + 'px';
+    drop.style.left = dropLeft + 'px';
+  }
+  let fallInterval = setInterval(fallDownDrop, 20);
+  let dropTimeout = setTimeout(generateRain, 1000);
 }
-// generateLeaves();
-document.addEventListener('keydown', control);
+
+
+
+buttonPlay.addEventListener('click', startGame);
