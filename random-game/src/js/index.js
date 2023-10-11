@@ -15,7 +15,7 @@ const buttonPlay = document.querySelector('.button__play-game');
 const modalHello = document.querySelector('.modal-hello');
 const modalGameOver = document.querySelector('.modal-game-over');
 const gameWidth = parseInt(window.getComputedStyle(canvas).getPropertyValue('width')) - parseInt(window.getComputedStyle(canvas).getPropertyValue('border-width')) * 3;
-// const btnRestart = document.querySelector('.restart')
+const btnRestart = document.querySelector('.restart')
 const buttonVolume = document.querySelector('.btn-sound-volume');
 let catcherLeft = parseInt(
   window.getComputedStyle(catcher).getPropertyValue('left'),
@@ -24,17 +24,11 @@ let catcherLeft = parseInt(
 let hp = 3;
 let score = 0;
 
-// btnRestart.addEventListener('click', restartGame);
 
-// function restartGame() {
-//   hp = 3;
-//   score = 0;
-//     modalHello.style.display = 'none';
-//     generateLeaves();
-//     generateRain();
-//     playAudio('background audio');
-//     document.addEventListener('keydown', control);
-//   }
+
+function restartGame() {
+  location.reload();
+  }
 
 function startGame() {
   modalHello.style.display = 'none';
@@ -80,7 +74,7 @@ function generateLeaves() {
       leafLeft > catcherLeft - 30 &&
       leafLeft < catcherLeft + 80
     ) {
-      playAudio('catch leaf');
+      controlAudio('catch leaf');
       leaves.removeChild(leaf);
       clearInterval(fallInterval);
       score++;
@@ -95,7 +89,7 @@ function generateLeaves() {
         scorePointFinally.innerText = `${score}`;
         modalGameOver.classList.remove('none');
         modalHello.classList.add('none');
-        playAudio('game over')
+        controlAudio('game over')
         return;
       }
     }
@@ -120,7 +114,7 @@ function generateRain() {
       dropLeft > catcherLeft - 10 &&
       dropLeft < catcherLeft + 50
     ) {
-      playAudio('catch drop');
+      controlAudio('catch drop');
       rain.removeChild(drop);
       clearInterval(fallInterval);
       clearTimeout(dropTimeout);
@@ -131,9 +125,6 @@ function generateRain() {
         modalGameOver.classList.remove('none');
         modalHello.classList.add('none');
         playAudio('game over')
-        // alert('Game over! Your score is:' + ` ${score}`);
-        // // playAudio('game over')
-        // location.reload();
       }
     }
     dropBottom -= 10;
@@ -151,3 +142,4 @@ function generateRain() {
 
 buttonPlay.addEventListener('click', startGame);
 buttonVolume.addEventListener('click', () => controlAudio('background audio'))
+btnRestart.addEventListener('click', restartGame);
