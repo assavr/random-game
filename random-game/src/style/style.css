@@ -36,7 +36,7 @@ h2 {
   display: flex;
   width: calc(100% - 20px);
   margin: 0 20px;
-  margin-bottom: 30px
+  margin-bottom: 30px;
 }
 
 .btn-sound-volume {
@@ -58,6 +58,7 @@ h2 {
   width: 800px;
   height: 800px;
   border: 20px solid rgb(207 112 22);
+  border-width: 20px;
   border-radius: 20px;
   background-color: rgba(216 123 86 / 50%);
   position: relative;
@@ -129,7 +130,7 @@ h2 {
   position: absolute;
   left: -60px;
   z-index: 11;
-  background-image: url("../img/leaf.svg");
+  background-image: url('../img/leaf.svg');
 }
 
 .drop {
@@ -138,7 +139,7 @@ h2 {
   position: absolute;
   left: -60px;
   z-index: 11;
-  background-image: url("../img/drop.svg");
+  background-image: url('../img/drop.svg');
 }
 
 .modal-hello {
@@ -205,26 +206,35 @@ h2 {
   font-size: 30px;
 }
 
-.restart {
+.game-over__score {
+  margin: 10px 0;
+}
+
+.game-over__description {
+  font-size: 20px;
+  line-height: 35px;
+  margin: 10px 0;
+}
+
+.game-button {
   width: fit-content;
   height: fit-content;
   padding: 10px 15px;
   border: 2px solid rgb(207 112 22);
   border-radius: 20px;
   background-color: rgba(216 123 86 / 50%);
-  margin-top: 10px;
+  margin-top: 40px;
   color: inherit;
   transform: scale(1);
-  transition-duration: .5s;
+  transition-duration: 0.5s;
 }
 
-.restart:hover {
+.game-button:hover {
   background-color: rgba(207, 107, 68, 0.5);
   transform: scale(1.1);
-  transition-duration: .25;
+  transition-duration: 0.25;
 }
 
 .none {
   display: none;
 }
-
