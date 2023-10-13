@@ -11,3 +11,13 @@ export function moveCatcherRight(hero, heroLeft) {
     hero.style.left = heroLeft + 'px';
   }
 }
+
+
+// export function control(event) {
+//   if (event.key === 'ArrowLeft' || event.code === 'KeyA') {
+//     moveCatcherLeft(hero, heroLeft)
+//   }
+//   if (event.key === 'ArrowRight' || event.code === 'KeyD') {
+//     moveCatcherRight(hero, heroLeft);
+//   }
+// }

@@ -1,6 +1,6 @@
 import { controlAudio, playAudio } from './audio.js';
 import { getRandomNumber } from './helper.js';
-import { moveCatcherLeft, moveCatcherRight } from './control_move.js';
+// import { moveCatcherLeft, moveCatcherRight,  } from './control_move.js';
 
 const btnRestart = document.querySelector('.restart');
 const buttonPlay = document.querySelector('.button__play-game');
@@ -53,26 +53,28 @@ function startGame() {
   document.addEventListener('keydown', control);
 }
 
-// function moveCatcherLeft() {
-//   if (catcherLeft > 0) {
-//     catcherLeft -= 20;
-//     catcher.style.left = catcherLeft + 'px';
-//   }
-// }
+function moveCatcherLeft() {
+  if (catcherLeft > 0) {
+    catcherLeft -= 20;
+    catcher.style.left = catcherLeft + 'px';
+  }
+}
 
-// function moveCatcherRight() {
-//   if (catcherLeft < 670) {
-//     catcherLeft += 20;
-//     catcher.style.left = catcherLeft + 'px';
-//   }
-// }
+function moveCatcherRight() {
+  if (catcherLeft < 670) {
+    catcherLeft += 20;
+    catcher.style.left = catcherLeft + 'px';
+  }
+}
 
 function control(event) {
   if (event.key === 'ArrowLeft' || event.code === 'KeyA') {
-    moveCatcherLeft(catcher, catcherLeft);
+    // moveCatcherLeft(catcher, catcherLeft);
+    moveCatcherLeft();
   }
   if (event.key === 'ArrowRight' || event.code === 'KeyD') {
-    moveCatcherRight(catcher, catcherLeft);
+    // moveCatcherRight(catcher, catcherLeft);
+    moveCatcherRight();
   }
 }
 
