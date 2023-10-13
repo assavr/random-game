@@ -1,3 +1,3 @@
-export function getRandomNumber(width) {
-  return  Math.floor(Math.random() * width);
+export function getRandomNumber(number) {
+  return  Math.floor(Math.random() * number);
 }
