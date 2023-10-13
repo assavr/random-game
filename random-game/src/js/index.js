@@ -1,5 +1,6 @@
 import { controlAudio, playAudio } from './audio.js';
 import { getRandomNumber } from './helper.js';
+import { moveCatcherLeft, moveCatcherRight } from './control_move.js';
 
 const btnRestart = document.querySelector('.restart');
 const buttonPlay = document.querySelector('.button__play-game');
@@ -18,7 +19,7 @@ const gameWidth =
   parseInt(window.getComputedStyle(canvas).getPropertyValue('width')) -
   parseInt(window.getComputedStyle(canvas).getPropertyValue('border-width')) *
     3;
-const hpImage = document.querySelectorAll('.hp');
+const hpImages = document.querySelectorAll('.hp');
 const leaves = document.querySelector('.leaves');
 const rain = document.querySelector('.rain');
 const scorePoint = document.querySelector('.score-points');
@@ -35,12 +36,12 @@ function restartGame() {
   score = 0;
   hp = 3;
   scorePoint.innerText = `${score}`;
-  hpImage[0].style.opacity = 1;
-  hpImage[1].style.opacity = 1;
-  hpImage[2].style.opacity = 1;
+  for (let hp of hpImages) {
+    hp.style.opacity = 1
+  }
+  // startGame()
   // location.reload();
 }
-
 
 function startGame() {
   catcher.style.left = catcherCenter + 'px';
@@ -52,26 +53,26 @@ function startGame() {
   document.addEventListener('keydown', control);
 }
 
-function moveCatcherLeft() {
-  if (catcherLeft > 0) {
-    catcherLeft -= 20;
-    catcher.style.left = catcherLeft + 'px';
-  }
-}
+// function moveCatcherLeft() {
+//   if (catcherLeft > 0) {
+//     catcherLeft -= 20;
+//     catcher.style.left = catcherLeft + 'px';
+//   }
+// }
 
-function moveCatcherRight() {
-  if (catcherLeft < 670) {
-    catcherLeft += 20;
-    catcher.style.left = catcherLeft + 'px';
-  }
-}
+// function moveCatcherRight() {
+//   if (catcherLeft < 670) {
+//     catcherLeft += 20;
+//     catcher.style.left = catcherLeft + 'px';
+//   }
+// }
 
 function control(event) {
   if (event.key === 'ArrowLeft' || event.code === 'KeyA') {
-    moveCatcherLeft();
+    moveCatcherLeft(catcher, catcherLeft);
   }
   if (event.key === 'ArrowRight' || event.code === 'KeyD') {
-    moveCatcherRight();
+    moveCatcherRight(catcher, catcherLeft);
   }
 }
 
@@ -103,7 +104,7 @@ function generateLeaves() {
     //   hpImage[hp].style.opacity = 0;
     // }
     hp--;
-    hpImage[hp].style.opacity = 0;
+    hpImages[hp].style.opacity = 0;
       clearInterval(fallInterval);
       clearTimeout(leafTimeout);
       if (hp === 0) {
@@ -155,7 +156,7 @@ function generateRain() {
     //     hpImage[hp].style.opacity = 0;
     //   }
       hp--;
-      hpImage[hp].style.opacity = 0;
+      hpImages[hp].style.opacity = 0;
       if (hp === 0) {
         dialogGameOver.show();
         dialogGameOver.setAttribute('opened', '');
