@@ -1,37 +1,51 @@
-import { controlAudio, playAudio} from './audio.js';
-import {getRandomNumber} from './helper.js';
+import { controlAudio, playAudio } from './audio.js';
+import { getRandomNumber } from './helper.js';
 
-const canvas = document.querySelector('.canvas')
+const btnRestart = document.querySelector('.restart');
+const buttonPlay = document.querySelector('.button__play-game');
+const buttonVolume = document.querySelector('.btn-sound-volume');
+const canvas = document.querySelector('.canvas');
 const catcher = document.querySelector('.catcher');
+const catcherCenter =
+  parseInt(window.getComputedStyle(canvas).getPropertyValue('width')) / 2 -
+  parseInt(window.getComputedStyle(catcher).getPropertyValue('width')) / 2;
 const catcherBottom = parseInt(
   window.getComputedStyle(catcher).getPropertyValue('bottom'),
 );
+const dialogGameOver = document.querySelector('.modal-game-over');
+const dialogHello = document.querySelector('.modal-hello');
+const gameWidth =
+  parseInt(window.getComputedStyle(canvas).getPropertyValue('width')) -
+  parseInt(window.getComputedStyle(canvas).getPropertyValue('border-width')) *
+    3;
 const hpImage = document.querySelectorAll('.hp');
 const leaves = document.querySelector('.leaves');
-const rain = document.querySelector('.rain')
+const rain = document.querySelector('.rain');
 const scorePoint = document.querySelector('.score-points');
 const scorePointFinally = document.querySelector('.score-points-finally');
-const buttonPlay = document.querySelector('.button__play-game');
-const modalHello = document.querySelector('.modal-hello');
-const modalGameOver = document.querySelector('.modal-game-over');
-const gameWidth = parseInt(window.getComputedStyle(canvas).getPropertyValue('width')) - parseInt(window.getComputedStyle(canvas).getPropertyValue('border-width')) * 3;
-const btnRestart = document.querySelector('.restart')
-const buttonVolume = document.querySelector('.btn-sound-volume');
+
 let catcherLeft = parseInt(
   window.getComputedStyle(catcher).getPropertyValue('left'),
 );
-
 let hp = 3;
 let score = 0;
-
-
+let totalScore = [];
 
 function restartGame() {
-  location.reload();
-  }
+  score = 0;
+  hp = 3;
+  scorePoint.innerText = `${score}`;
+  hpImage[0].style.opacity = 1;
+  hpImage[1].style.opacity = 1;
+  hpImage[2].style.opacity = 1;
+  // location.reload();
+}
+
 
 function startGame() {
-  modalHello.style.display = 'none';
+  catcher.style.left = catcherCenter + 'px';
+  dialogHello.removeAttribute('opened', '');
+  setTimeout(() => dialogHello.close(), 500);
   generateLeaves();
   generateRain();
   playAudio('background audio');
@@ -65,8 +79,8 @@ function generateLeaves() {
   let leafBottom = 750;
   const leafLeft = getRandomNumber(gameWidth);
   const leaf = document.createElement('div');
-  leaf.setAttribute('class', 'leaf');
   leaves.appendChild(leaf);
+  leaf.setAttribute('class', 'leaf');
   function fallDownLeaves() {
     if (
       leafBottom < catcherBottom + 50 &&
@@ -81,17 +95,30 @@ function generateLeaves() {
       scorePoint.innerText = `${score}`;
     }
     if (leafBottom < catcherBottom) {
-      hp--;
-      hpImage[hp].style.opacity = 0;
+
+    //   for (let i = 3; hp > -1; i-- ) {
+    //   hp--;
+    //   console.log(hp)
+    //   console.log(i)
+    //   hpImage[hp].style.opacity = 0;
+    // }
+    hp--;
+    hpImage[hp].style.opacity = 0;
       clearInterval(fallInterval);
       clearTimeout(leafTimeout);
       if (hp === 0) {
         scorePointFinally.innerText = `${score}`;
-        modalGameOver.classList.remove('none');
-        modalHello.classList.add('none');
-        controlAudio('game over')
-        return;
+        controlAudio('game over');
+        dialogGameOver.show();
+        dialogGameOver.setAttribute('opened', '');
+        console.log(score);
+        totalScore.push(`${score}`);
+        console.log(totalScore);
+        localStorage.setItem('totalScore', `${totalScore}`);
+        // clearInterval(fallInterval);
+        // clearTimeout(leafTimeout)
       }
+
     }
     leafBottom -= 5;
     leaf.style.bottom = leafBottom + 'px';
@@ -100,6 +127,9 @@ function generateLeaves() {
   let fallInterval = setInterval(fallDownLeaves, 20);
   let leafTimeout = setTimeout(generateLeaves, 2000);
 }
+
+// let scoreScore = generateLeaves();
+// console.log(scoreScore)
 
 function generateRain() {
   let dropBottom = 750;
@@ -114,18 +144,28 @@ function generateRain() {
       dropLeft > catcherLeft - 10 &&
       dropLeft < catcherLeft + 50
     ) {
+      rain.removeChild(drop)
       controlAudio('catch drop');
-      rain.removeChild(drop);
       clearInterval(fallInterval);
       clearTimeout(dropTimeout);
+
+    //  for (let i = 3; hp > -1; i-- ) {
+    //     hp--;
+    //     console.log(hp)
+    //     hpImage[hp].style.opacity = 0;
+    //   }
       hp--;
       hpImage[hp].style.opacity = 0;
-      if( hp === 0) {
+      if (hp === 0) {
+        dialogGameOver.show();
+        dialogGameOver.setAttribute('opened', '');
         scorePointFinally.innerText = `${score}`;
-        modalGameOver.classList.remove('none');
-        modalHello.classList.add('none');
-        playAudio('game over')
+        controlAudio('game over');
+        dialogGameOver.show();
+        // clearInterval(fallInterval);
+        // clearTimeout(dropTimeout)
       }
+
     }
     dropBottom -= 10;
     drop.style.bottom = dropBottom + 'px';
@@ -133,13 +173,15 @@ function generateRain() {
   }
   let fallInterval = setInterval(fallDownDrop, 20);
   let dropTimeout = setTimeout(generateRain, 1000);
-  if (hp === 0) {
-    return;
-  }
 }
 
 
-
-buttonPlay.addEventListener('click', startGame);
-buttonVolume.addEventListener('click', () => controlAudio('background audio'))
+buttonPlay.addEventListener('click', startGame)
+document.onkeydown = function startPlay(event) {
+  if (event.code === 'Space') {
+    startGame();
+  }
+}
+buttonVolume.addEventListener('click', () => controlAudio('background audio'));
 btnRestart.addEventListener('click', restartGame);
+console.log(score);

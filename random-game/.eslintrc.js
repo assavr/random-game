@@ -11,6 +11,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'max-lines-per-function': ['error', 40],
+    // 'max-lines-per-function': ['error', 40],
   },
 };

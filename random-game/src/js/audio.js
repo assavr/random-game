@@ -15,13 +15,8 @@ export function controlAudio(audioKey) {
   let audio;
   if (audioKey === 'background audio') {
     audio = listAudio['background audio'];
-    audio.setAttribute('loop', 'loop');
+    audio.setAttribute('loop', '');
     buttonVolume.classList.toggle('volume-max');
-      if(audio.paused) {
-        leafAudio.volume = 0;
-        dropAudio.volume = 0;
-        gameOver.volume = 0;
-      }
   }
   if (audioKey === 'catch leaf') {
     audio = listAudio['catch leaf'];
@@ -34,26 +29,38 @@ export function controlAudio(audioKey) {
   }
   if (audio.paused) {
     audio.play();
-
   } else {
     audio.pause();
   }
-  if(bgAudio.paused) {
-    leafAudio.volume = 0;
-    dropAudio.volume = 0;
-    gameOver.volume = 0;
-  } else {
-    leafAudio.volume = 0.1;
-    dropAudio.volume = 0.1;
-    gameOver.volume = 0.3;
+  controlVolume(audioKey);
+}
+
+function controlVolume(audioKey) {
+  let audio;
+  audio = listAudio[audioKey];
+  if (audioKey === 'background audio' && audio.paused) {
+    for (let key in listAudio) {
+      listAudio[key].volume = 0;
+    }
+  } else if ((audioKey === 'background audio' && !audio.paused)) {
+    audio.play();
+    setStartVolumes()
   }
 }
 
 export function playAudio(audioKey) {
   let audio;
+  setStartVolumes()
   if (audioKey === 'background audio') {
     audio = listAudio['background audio'];
     buttonVolume.classList.add('volume-max');
   }
   audio.play();
+}
+
+function setStartVolumes() {
+  leafAudio.volume = 0.1;
+  dropAudio.volume = 0.1;
+  gameOver.volume = 0.3;
+  bgAudio.volume = 0.3;
 }

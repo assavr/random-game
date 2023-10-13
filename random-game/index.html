@@ -14,6 +14,7 @@
       <h1 class="title">
         H<span
           ><img
+            `
             class="title-pumpkin"
             src="./src/img/pumpkin.svg"
             alt="" /></span
@@ -55,7 +56,7 @@
       <div class="tree">
         <img src="./src/img/firs.svg" alt="tree pic" />
       </div>
-      <div class="modal-hello ">
+      <dialog class="modal-hello"  open opened>
         <div class="modal-hello__content">
           <h2>
             H<span
@@ -82,12 +83,10 @@
                 width="20px" /></span
             >! Будь аккуратен, болеть не круто!
           </p>
-          <button class="button__play-game game-button">
-            Начать
-          </button>
+          <button class="button__play-game game-button">Начать</button>
         </div>
-      </div>
-      <div class="modal-game-over none">
+      </dialog>
+      <dialog class="modal-game-over" >
         <div class="modal-game-over__content">
           <h2>
             G<span
@@ -97,13 +96,33 @@
                 alt="" /></span
             >me Over!
           </h2>
-          <p class="game-over__score">Твой счёт: <span class="score-points-finally">0</span></p>
+          <p class="game-over__score">
+            Твой счёт: <span class="score-points-finally">0</span>
+          </p>
           <p class="game-over__description">
-            На улице было слишком холодно и дождливо, ты заболел! Выздоравливай и возвращайся снова!
+            На улице было слишком холодно и дождливо, ты заболел! Выздоравливай
+            и возвращайся снова!
           </p>
           <button class="restart game-button">Выздороветь</button>
         </div>
-      </div>
+      </dialog>
+      <dialog class="dialog-score" >
+        <div class="dialog-score-content">
+          <h2 class="title-total-score">Total Score</h2>
+          <ul>
+            <li class ='li-1'>1.</li>
+            <li>2.</li>
+            <li>3.</li>
+            <li>4.</li>
+            <li>5.</li>
+            <li>6.</li>
+            <li>7.</li>
+            <li>8.</li>
+            <li>9.</li>
+            <li>10.</li>
+          </ul>
+        </div>
+      </dialog>
     </div>
     <script src="./src/js/index.js" type="module"></script>
   </body>
