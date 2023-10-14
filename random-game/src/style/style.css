@@ -171,8 +171,8 @@ dialog {
   opacity: 0;
   transform: translateY(-20px);
   transition:
-    opacity .5s ease-out,
-    transform .5s ease-out;
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
 }
 
 .modal-hello[opened] {
@@ -181,6 +181,8 @@ dialog {
 }
 
 .modal-hello__content {
+  overflow: hidden;
+  position: relative;
   background-color: #e5d8be;
   border: 5px solid #cf7016;
   border-radius: 20px;
@@ -213,7 +215,6 @@ dialog {
 }
 
 .modal-game-over {
-  position: relative;
   z-index: 100;
   margin-top: -110px;
   padding: 150px 100px;
@@ -237,6 +238,8 @@ dialog {
 }
 
 .modal-game-over__content {
+  overflow: hidden;
+  position: relative;
   background-color: #e5d8be;
   border: 5px solid #cf7016;
   border-radius: 20px;
@@ -278,8 +281,8 @@ dialog {
 }
 
 .dialog-score {
-  position: relative;
-  z-index: 100;
+  position: absolute;
+  z-index: 200;
   margin-top: -110px;
   padding: 150px 100px;
   width: 100%;
@@ -301,6 +304,42 @@ dialog {
   vertical-align: middle;
   font-size: 25px;
 }
+
+.top-score {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.top-score .text-btn-top-score {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 15px 0;
+  background-color: #cf7016;
+  box-shadow: 0 5px 10px rgba(0 0 0 / 10%);
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0 0 0 / 20%);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.top-score-top-right {
+  right: -10px;
+}
+
+.score-game-over {
+  bottom: -10px;
+}
+
+.top-score-top-right .text-btn-top-score {
+  left: -15px;
+  top: 70px;
+  transform: rotate(312deg);
+}
+
 
 .none {
   display: none;

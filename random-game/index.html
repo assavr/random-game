@@ -44,8 +44,7 @@
           >Score: <span class="score-points">0</span>
         </span>
       </div>
-      <div class="leaves"></div>
-      <div class="rain"></div>
+      <div class="falling-objects"></div>
       <div class="dead-line"></div>
       <div class="catcher">
         <img class="catcher__img" src="./src/img/fox.svg" alt="" />
@@ -56,7 +55,7 @@
       <div class="tree">
         <img src="./src/img/firs.svg" alt="tree pic" />
       </div>
-      <dialog class="modal-hello"  open opened>
+      <dialog class="modal-hello" open opened>
         <div class="modal-hello__content">
           <h2>
             H<span
@@ -84,9 +83,16 @@
             >! Будь аккуратен, болеть не круто!
           </p>
           <button class="button__play-game game-button">Начать</button>
+
+
+          <button class="top-score top-score-top-right ">
+            <span class="text-btn-top-score">Score?</span>
+          </button>
+
+
         </div>
       </dialog>
-      <dialog class="modal-game-over" >
+      <dialog class="modal-game-over">
         <div class="modal-game-over__content">
           <h2>
             G<span
@@ -104,26 +110,29 @@
             и возвращайся снова!
           </p>
           <button class="restart game-button">Выздороветь</button>
+          <button class="top-score top-score-top-right score-game-over">
+            <span class="text-btn-top-score">Score?</span>
+          </button>
         </div>
       </dialog>
-      <dialog class="dialog-score" >
+      <dialog class="dialog-score">
         <div class="dialog-score-content">
           <h2 class="title-total-score">Total Score</h2>
-          <ul>
-            <li class ='li-1'>1.</li>
-            <li>2.</li>
-            <li>3.</li>
-            <li>4.</li>
-            <li>5.</li>
-            <li>6.</li>
-            <li>7.</li>
-            <li>8.</li>
-            <li>9.</li>
-            <li>10.</li>
-          </ul>
+          <ol>
+            <li class="li-1"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li>.</li>
+          </ol>
         </div>
       </dialog>
     </div>
-    <script src="./src/js/index.js" type="module"></script>
+    <script src="./src/js/index-game.js" type="module"></script>
   </body>
 </html>

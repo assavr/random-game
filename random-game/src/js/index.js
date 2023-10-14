@@ -15,13 +15,17 @@ const catcherBottom = parseInt(
 );
 const dialogGameOver = document.querySelector('.modal-game-over');
 const dialogHello = document.querySelector('.modal-hello');
+const dialogScore = document.querySelector('.dialog-score');
+const findScore = document.querySelector('.top-score')
 const gameWidth =
   parseInt(window.getComputedStyle(canvas).getPropertyValue('width')) -
   parseInt(window.getComputedStyle(canvas).getPropertyValue('border-width')) *
     3;
+const gameHeight = parseInt(
+  window.getComputedStyle(canvas).getPropertyValue('height'),
+);
 const hpImages = document.querySelectorAll('.hp');
-const leaves = document.querySelector('.leaves');
-const rain = document.querySelector('.rain');
+const fallingObjects = document.querySelector('.falling-objects');
 const scorePoint = document.querySelector('.score-points');
 const scorePointFinally = document.querySelector('.score-points-finally');
 
@@ -30,27 +34,31 @@ let catcherLeft = parseInt(
 );
 let hp = 3;
 let score = 0;
-let totalScore = [];
-
-function restartGame() {
-  score = 0;
-  hp = 3;
-  scorePoint.innerText = `${score}`;
-  for (let hp of hpImages) {
-    hp.style.opacity = 1
-  }
-  // startGame()
-  // location.reload();
-}
+// let topScore = [];
 
 function startGame() {
+  hp = 3;
+  score = 0;
+  scorePoint.innerText = `${score}`;
+  for (let hp of hpImages) {
+    hp.style.opacity = 1;
+  }
+  fallingObjects.innerHTML = '';
   catcher.style.left = catcherCenter + 'px';
   dialogHello.removeAttribute('opened', '');
+  dialogGameOver.close();
   setTimeout(() => dialogHello.close(), 500);
-  generateLeaves();
-  generateRain();
+  startGameLoop();
   playAudio('background audio');
   document.addEventListener('keydown', control);
+}
+
+function endGame() {
+  scorePointFinally.innerText = `${score}`;
+  controlAudio('game over');
+  dialogGameOver.show();
+  dialogGameOver.setAttribute('opened', '');
+  document.removeEventListener('keydown', control);
 }
 
 function moveCatcherLeft() {
@@ -78,113 +86,108 @@ function control(event) {
   }
 }
 
-function generateLeaves() {
-  let leafBottom = 750;
-  const leafLeft = getRandomNumber(gameWidth);
-  const leaf = document.createElement('div');
-  leaves.appendChild(leaf);
-  leaf.setAttribute('class', 'leaf');
-  function fallDownLeaves() {
-    if (
-      leafBottom < catcherBottom + 50 &&
-      leafBottom > catcherBottom &&
-      leafLeft > catcherLeft - 30 &&
-      leafLeft < catcherLeft + 80
-    ) {
-      controlAudio('catch leaf');
-      leaves.removeChild(leaf);
-      clearInterval(fallInterval);
-      score++;
-      scorePoint.innerText = `${score}`;
-    }
-    if (leafBottom < catcherBottom) {
+function generateObject(objType /* leaf or drop */) {
+  const elem = document.createElement('div');
+  const x = getRandomNumber(gameWidth);
+  const y = gameHeight;
 
-    //   for (let i = 3; hp > -1; i-- ) {
-    //   hp--;
-    //   console.log(hp)
-    //   console.log(i)
-    //   hpImage[hp].style.opacity = 0;
-    // }
-    hp--;
-    hpImages[hp].style.opacity = 0;
-      clearInterval(fallInterval);
-      clearTimeout(leafTimeout);
-      if (hp === 0) {
-        scorePointFinally.innerText = `${score}`;
-        controlAudio('game over');
-        dialogGameOver.show();
-        dialogGameOver.setAttribute('opened', '');
-        console.log(score);
-        totalScore.push(`${score}`);
-        console.log(totalScore);
-        localStorage.setItem('totalScore', `${totalScore}`);
-        // clearInterval(fallInterval);
-        // clearTimeout(leafTimeout)
-      }
+  elem.classList.add(objType);
+  fallingObjects.appendChild(elem);
 
-    }
-    leafBottom -= 5;
-    leaf.style.bottom = leafBottom + 'px';
-    leaf.style.left = leafLeft + 'px';
-  }
-  let fallInterval = setInterval(fallDownLeaves, 20);
-  let leafTimeout = setTimeout(generateLeaves, 2000);
+  return {
+    x,
+    y,
+    elem,
+    objType,
+    isActive: true,
+  };
 }
 
-// let scoreScore = generateLeaves();
-// console.log(scoreScore)
+function startGameLoop() {
+  const generatedObjects = [generateObject('leaf'), generateObject('drop')];
 
-function generateRain() {
-  let dropBottom = 750;
-  const dropLeft = getRandomNumber(gameWidth);
-  const drop = document.createElement('div');
-  drop.setAttribute('class', 'drop');
-  rain.appendChild(drop);
-  function fallDownDrop() {
-    if (
-      dropBottom < catcherBottom + 50 &&
-      dropBottom > catcherBottom &&
-      dropLeft > catcherLeft - 10 &&
-      dropLeft < catcherLeft + 50
-    ) {
-      rain.removeChild(drop)
-      controlAudio('catch drop');
-      clearInterval(fallInterval);
-      clearTimeout(dropTimeout);
+  function fallDownObjects() {
+    const objParams = {
+      leaf: {
+        velocity: 5,
+        catcherOffsetLeft: 40,
+        catcherOffsetRight: 40,
+        catchSound: 'catch leaf',
+      },
+      drop: {
+        velocity: 10,
+        catcherOffsetLeft: 40,
+        catcherOffsetRight: 40,
+        catchSound: 'catch drop',
+      },
+    };
 
-    //  for (let i = 3; hp > -1; i-- ) {
-    //     hp--;
-    //     console.log(hp)
-    //     hpImage[hp].style.opacity = 0;
-    //   }
-      hp--;
-      hpImages[hp].style.opacity = 0;
-      if (hp === 0) {
-        dialogGameOver.show();
-        dialogGameOver.setAttribute('opened', '');
-        scorePointFinally.innerText = `${score}`;
-        controlAudio('game over');
-        dialogGameOver.show();
-        // clearInterval(fallInterval);
-        // clearTimeout(dropTimeout)
+    for (const obj of generatedObjects) {
+      if (!obj.isActive) {
+        continue;
       }
 
+      if (
+        obj.y < catcherBottom + 80 &&
+        obj.y > catcherBottom &&
+        obj.x > catcherLeft - objParams[obj.objType].catcherOffsetLeft &&
+        obj.x < catcherLeft + objParams[obj.objType].catcherOffsetRight
+      ) {
+        controlAudio(objParams[obj.objType].catchSound);
+        obj.elem.style.opacity = 0;
+        obj.isActive = false;
+
+        if (obj.objType === 'leaf') {
+          score++;
+          scorePoint.innerText = `${score}`;
+        } else if (obj.objType === 'drop') {
+          hp--;
+          hpImages[hp].style.opacity = 0;
+        }
+      }
+
+      if (obj.y < catcherBottom) {
+        obj.isActive = false;
+
+        if (obj.objType === 'leaf') {
+          hp--;
+          hpImages[hp].style.opacity = 0;
+        } else if (obj.objType === 'drop') {
+          obj.elem.style.opacity = 0;
+        }
+      }
+
+      if (hp === 0) {
+        clearInterval(fallIntervalId);
+        clearInterval(generateLeafId);
+        clearInterval(generateDropId);
+        endGame();
+      }
+
+      obj.y -= objParams[obj.objType].velocity;
+      obj.elem.style.bottom = `${obj.y}px`;
+      obj.elem.style.left = `${obj.x}px`;
     }
-    dropBottom -= 10;
-    drop.style.bottom = dropBottom + 'px';
-    drop.style.left = dropLeft + 'px';
   }
-  let fallInterval = setInterval(fallDownDrop, 20);
-  let dropTimeout = setTimeout(generateRain, 1000);
+
+  const generateLeafId = setInterval(() => {
+    generatedObjects.push(generateObject('leaf'));
+  }, 2000);
+  const generateDropId = setInterval(() => {
+    generatedObjects.push(generateObject('drop'));
+  }, 1000);
+  const fallIntervalId = setInterval(fallDownObjects, 20);
 }
 
-
-buttonPlay.addEventListener('click', startGame)
+buttonPlay.addEventListener('click', startGame);
 document.onkeydown = function startPlay(event) {
   if (event.code === 'Space') {
     startGame();
   }
-}
+};
 buttonVolume.addEventListener('click', () => controlAudio('background audio'));
-btnRestart.addEventListener('click', restartGame);
-console.log(score);
+// btnRestart.addEventListener('click', startGame);
+findScore.addEventListener('click', () => {
+  dialogScore.show();
+  dialogScore.setAttribute('opened');
+})
