@@ -5,7 +5,6 @@ import { getRandomNumber } from './helper.js';
 const btnRestart = document.querySelector('.restart');
 const buttonPlay = document.querySelector('.button__play-game');
 const buttonVolume = document.querySelector('.btn-sound-volume');
-const buttonCloseScore = document.querySelector('.close-score');
 const canvas = document.querySelector('.canvas');
 const catcher = document.querySelector('.catcher');
 const catcherCenter =
@@ -16,15 +15,10 @@ const catcherBottom = parseInt(
 );
 const dialogGameOver = document.querySelector('.modal-game-over');
 const dialogHello = document.querySelector('.modal-hello');
-const dialogScore = document.querySelector('.dialog-score');
-const openScoreList = document.querySelectorAll('.top-score')
 const gameWidth =
   parseInt(window.getComputedStyle(canvas).getPropertyValue('width')) -
   parseInt(window.getComputedStyle(canvas).getPropertyValue('border-width')) *
     3;
-const gameHeight = parseInt(
-  window.getComputedStyle(canvas).getPropertyValue('height'),
-);
 const hpImages = document.querySelectorAll('.hp');
 const fallingObjects = document.querySelector('.falling-objects');
 const scorePoint = document.querySelector('.score-points');
@@ -35,10 +29,7 @@ let catcherLeft = parseInt(
 );
 let hp = 3;
 let score = 0;
-// let topScore = [];
-
-
-
+let totalScore = [];
 
 function startGame() {
   hp = 3;
@@ -49,10 +40,9 @@ function startGame() {
   }
   fallingObjects.innerHTML = '';
   catcher.style.left = catcherCenter + 'px';
-  dialogHello.classList.remove('open');
-  dialogGameOver.classList.remove('open');
+  dialogHello.removeAttribute('opened', '');
+  dialogGameOver.close();
   setTimeout(() => dialogHello.close(), 500);
-  setTimeout(() => dialogGameOver.close(), 500);
   startGameLoop();
   playAudio('background audio');
   document.addEventListener('keydown', control);
@@ -62,7 +52,11 @@ function endGame() {
   scorePointFinally.innerText = `${score}`;
   controlAudio('game over');
   dialogGameOver.show();
-  dialogGameOver.classList.add('open');
+  dialogGameOver.setAttribute('opened', '');
+  console.log(score);
+  totalScore.push(`${score}`);
+  console.log(totalScore);
+  localStorage.setItem('totalScore', `${totalScore}`);
   document.removeEventListener('keydown', control);
 }
 
@@ -94,7 +88,7 @@ function control(event) {
 function generateObject(objType /* leaf or drop */) {
   const elem = document.createElement('div');
   const x = getRandomNumber(gameWidth);
-  const y = gameHeight;
+  const y = 750;
 
   elem.classList.add(objType);
   fallingObjects.appendChild(elem);
@@ -115,14 +109,14 @@ function startGameLoop() {
     const objParams = {
       leaf: {
         velocity: 5,
-        catcherOffsetLeft: 40,
-        catcherOffsetRight: 40,
+        catcherOffsetLeft: 30,
+        catcherOffsetRight: 80,
         catchSound: 'catch leaf',
       },
       drop: {
         velocity: 10,
-        catcherOffsetLeft: 40,
-        catcherOffsetRight: 40,
+        catcherOffsetLeft: 10,
+        catcherOffsetRight: 50,
         catchSound: 'catch drop',
       },
     };
@@ -133,7 +127,7 @@ function startGameLoop() {
       }
 
       if (
-        obj.y < catcherBottom + 80 &&
+        obj.y < catcherBottom + 50 &&
         obj.y > catcherBottom &&
         obj.x > catcherLeft - objParams[obj.objType].catcherOffsetLeft &&
         obj.x < catcherLeft + objParams[obj.objType].catcherOffsetRight
@@ -185,33 +179,11 @@ function startGameLoop() {
 }
 
 buttonPlay.addEventListener('click', startGame);
-
 document.onkeydown = function startPlay(event) {
   if (event.code === 'Space') {
     startGame();
   }
 };
-
 buttonVolume.addEventListener('click', () => controlAudio('background audio'));
-
 btnRestart.addEventListener('click', startGame);
-
-openScoreList.forEach((elem) => {
-  elem.addEventListener('click', () => {
-    dialogScore.show();
-    dialogScore.classList.add('open');
-    dialogGameOver.classList.remove('open')
-    dialogGameOver.close();
-    dialogHello.close()
-    // setTimeout(() => dialogGameOver.close(), 500);
-    dialogHello.classList.remove('open')
-    // setTimeout(() => dialogHello.close(), 500);
-  })
-})
-
-buttonCloseScore.addEventListener('click', () => {
-  dialogScore.classList.remove('open');
-  dialogScore.close();
-  dialogHello.classList.add('open');
-  dialogHello.show();
-})
+console.log(score);

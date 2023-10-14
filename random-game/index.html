@@ -55,7 +55,7 @@
       <div class="tree">
         <img src="./src/img/firs.svg" alt="tree pic" />
       </div>
-      <dialog class="modal-hello" open opened>
+      <dialog class="modal-hello open" open>
         <div class="modal-hello__content">
           <h2>
             H<span
@@ -117,9 +117,12 @@
       </dialog>
       <dialog class="dialog-score">
         <div class="dialog-score-content">
-          <h2 class="title-total-score">Total Score</h2>
+          <div class="score-header">
+            <h2 class="title-statistics-score">Score Statistics</h2>
+            <button class="close-score" title="Close"><img src="./src/img/cross.png" alt="close button"></button>
+          </div>
+
           <ol>
-            <li class="li-1"></li>
             <li></li>
             <li></li>
             <li></li>
@@ -128,11 +131,12 @@
             <li></li>
             <li></li>
             <li></li>
-            <li>.</li>
+            <li></li>
+            <li></li>
           </ol>
         </div>
       </dialog>
     </div>
-    <script src="./src/js/index-game.js" type="module"></script>
+    <script src="./src/js/index.js" type="module"></script>
   </body>
 </html>

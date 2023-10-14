@@ -26,10 +26,6 @@ h2 {
   margin: 0;
 }
 
-li {
-  list-style: none;
-}
-
 dialog {
   background-color: transparent;
   border: none;
@@ -232,10 +228,12 @@ dialog {
     transform 0.3s ease-out;
 }
 
-.modal-game-over[opened] {
+.open {
   opacity: 1;
   transform: translateY(0);
 }
+
+
 
 .modal-game-over__content {
   overflow: hidden;
@@ -290,8 +288,8 @@ dialog {
   backdrop-filter: blur(5px);
 }
 
-.title-total-score {
-  text-align: center;
+.title-statistics-score {
+  margin: 0 auto;
 }
 
 .dialog-score-content {
@@ -303,6 +301,20 @@ dialog {
   padding: 30px 90px;
   vertical-align: middle;
   font-size: 25px;
+}
+
+.score-header {
+  display: flex;
+}
+
+.close-score img {
+  width: 40px;
+  transition: .5s;
+}
+
+.close-score:hover img {
+  filter: opacity(0.5);
+  transition: .5s;
 }
 
 .top-score {
@@ -326,8 +338,17 @@ dialog {
   text-align: center;
 }
 
+
+
 .top-score-top-right {
   right: -10px;
+  transition: .5s;
+}
+
+.top-score:hover{
+  /* right: 0px; */
+  transform: scale(1.1);
+  transition: .5s;
 }
 
 .score-game-over {
